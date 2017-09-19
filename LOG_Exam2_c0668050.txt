@@ -1,0 +1,299 @@
+MariaDB [Examc0668050]> CREATE TABLE Employee (  EmployeeID  INTEGER PRIMARY KEY,  Name        VARCHAR(255) NOT NULL,  Position    VARCHAR(255) NOT NULL,  Salary      REAL NOT NULL,  Remarks     VARCHAR(255)); CREATE TABLE Planet (  PlanetID    INTEGER PRIMARY KEY,  Name        VARCHAR(255) NOT NULL,  Coordinates REAL NOT NULL); CREATE TABLE Shipment (  ShipmentID    INTEGER PRIMARY KEY,  ShipmentDate  DATE,  Manager       INTEGER NOT NULL,  Planet        INTEGER NOT NULL,  FOREIGN KEY (Manager) REFERENCES Employee(EmployeeID),  FOREIGN KEY (Planet) REFERENCES Planet(PlanetID));CREATE TABLE Has_Clearance (  Employee  INTEGER NOT NULL,  Planet    INTEGER NOT NULL,  Level     INTEGER NOT NULL,  PRIMARY KEY(Employee, Planet),  FOREIGN KEY (Employee) REFERENCES Employee(EmployeeID),  FOREIGN KEY (Planet) REFERENCES Planet(PlanetID)); CREATE TABLE Client (  AccountNumber INTEGER PRIMARY KEY,  Name          VARCHAR(255) NOT NULL);  CREATE TABLE Package (  Shipment      INTEGER NOT NULL,  PackageNumber INTEGER NOT NULL,  Contents      VARCHAR(255) NOT NULL,  Weight        REAL NOT NULL,  Sender        INTEGER NOT NULL,  Recipient     INTEGER NOT NULL,  PRIMARY KEY(Shipment, PackageNumber),  FOREIGN KEY (Shipment) REFERENCES Shipment(ShipmentID),  FOREIGN KEY (Sender) REFERENCES Client(AccountNumber),  FOREIGN KEY (Recipient) REFERENCES Client(AccountNumber));INSERT INTO Client VALUES(1, 'Zapp Brannigan');INSERT INTO Client VALUES(2, "Al Gore's Head");INSERT INTO Client VALUES(3, 'Barbados Slim');INSERT INTO Client VALUES(4, 'Ogden Wernstrom');INSERT INTO Client VALUES(5, 'Leo Wong');INSERT INTO Client VALUES(6, 'Lrrr');INSERT INTO Client VALUES(7, 'John Zoidberg');INSERT INTO Client VALUES(8, 'John Zoidfarb');INSERT INTO Client VALUES(9, 'Morbo');INSERT INTO Client VALUES(10, 'Judge John Whitey');INSERT INTO Client VALUES(11, 'Calculon');INSERT INTO Employee VALUES(1, 'Phillip J. Fry', 'Delivery boy', 7500.0, 'Not to be confused with the Philip J. Fry from Hovering Squid World 97a');INSERT INTO Employee VALUES(2, 'Turanga Leela', 'Captain', 10000.0, NULL);INSERT INTO Employee VALUES(3, 'Bender Bending Rodriguez', 'Robot', 7500.0, NULL);INSERT INTO Employee VALUES(4, 'Hubert J. Farnsworth', 'CEO', 20000.0, NULL);INSERT INTO Employee VALUES(5, 'John A. Zoidberg', 'Physician', 25.0, NULL);INSERT INTO Employee VALUES(6, 'Amy Wong', 'Intern', 5000.0, NULL);INSERT INTO Employee VALUES(7, 'Hermes Conrad', 'Bureaucrat', 10000.0, NULL);INSERT INTO Employee VALUES(8, 'Scruffy Scruffington', 'Janitor', 5000.0, NULL);INSERT INTO Planet VALUES(1, 'Omicron Persei 8', 89475345.3545);INSERT INTO Planet VALUES(2, 'Decapod X', 65498463216.3466);INSERT INTO Planet VALUES(3, 'Mars', 32435021.65468);INSERT INTO Planet VALUES(4, 'Omega III', 98432121.5464);INSERT INTO Planet VALUES(5, 'Tarantulon VI', 849842198.354654);INSERT INTO Planet VALUES(6, 'Cannibalon', 654321987.21654);INSERT INTO Planet VALUES(7, 'DogDoo VII', 65498721354.688);INSERT INTO Planet VALUES(8, 'Nintenduu 64', 6543219894.1654);INSERT INTO Planet VALUES(9, 'Amazonia', 65432135979.6547);INSERT INTO Has_Clearance VALUES(1, 1, 2);INSERT INTO Has_Clearance VALUES(1, 2, 3);INSERT INTO Has_Clearance VALUES(2, 3, 2);INSERT INTO Has_Clearance VALUES(2, 4, 4);INSERT INTO Has_Clearance VALUES(3, 5, 2);INSERT INTO Has_Clearance VALUES(3, 6, 4);INSERT INTO Has_Clearance VALUES(4, 7, 1);INSERT INTO Shipment VALUES(1, '3004/05/11', 1, 1);INSERT INTO Shipment VALUES(2, '3004/05/11', 1, 2);INSERT INTO Shipment VALUES(3, NULL, 2, 3);INSERT INTO Shipment VALUES(4, NULL, 2, 4);INSERT INTO Shipment VALUES(5, NULL, 7, 5);INSERT INTO Package VALUES(1, 1, 'Undeclared', 1.5, 1, 2);INSERT INTO Package VALUES(2, 1, 'Undeclared', 10.0, 2, 3);INSERT INTO Package VALUES(2, 2, 'A bucket of krill', 2.0, 8, 7);INSERT INTO Package VALUES(3, 1, 'Undeclared', 15.0, 3, 4);INSERT INTO Package VALUES(3, 2, 'Undeclared', 3.0, 5, 1);INSERT INTO Package VALUES(3, 3, 'Undeclared', 7.0, 2, 3);INSERT INTO Package VALUES(4, 1, 'Undeclared', 5.0, 4, 5);INSERT INTO Package VALUES(4, 2, 'Undeclared', 27.0, 1, 2);INSERT INTO Package VALUES(5, 1, 'Undeclared', 100.0, 5, 1);
+ERROR 1050 (42S01): Table 'employee' already exists
+ERROR 1050 (42S01): Table 'planet' already exists
+ERROR 1050 (42S01): Table 'shipment' already exists
+ERROR 1050 (42S01): Table 'has_clearance' already exists
+ERROR 1050 (42S01): Table 'client' already exists
+ERROR 1050 (42S01): Table 'package' already exists
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '2' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '3' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '4' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '5' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '6' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '7' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '8' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '9' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '10' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '11' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '2' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '3' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '4' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '5' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '6' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '7' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '8' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '2' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '3' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '4' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '5' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '6' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '7' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '8' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '9' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '1-1' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '1-2' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '2-3' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '2-4' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '3-5' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '3-6' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '4-7' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '2' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '3' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '4' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '5' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '1-1' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '2-1' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '2-2' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '3-1' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '3-2' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '3-3' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '4-1' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '4-2' for key 'PRIMARY'
+ERROR 1062 (23000): Duplicate entry '5-1' for key 'PRIMARY'
+MariaDB [Examc0668050]> SELECT * FROM package;
++----------+---------------+-------------------+--------+--------+-----------+
+| Shipment | PackageNumber | Contents          | Weight | Sender | Recipient |
++----------+---------------+-------------------+--------+--------+-----------+
+|        1 |             1 | Undeclared        |    1.5 |      1 |         2 |
+|        2 |             1 | Undeclared        |     10 |      2 |         3 |
+|        2 |             2 | A bucket of krill |      2 |      8 |         7 |
+|        3 |             1 | Undeclared        |     15 |      3 |         4 |
+|        3 |             2 | Undeclared        |      3 |      5 |         1 |
+|        3 |             3 | Undeclared        |      7 |      2 |         3 |
+|        4 |             1 | Undeclared        |      5 |      4 |         5 |
+|        4 |             2 | Undeclared        |     27 |      1 |         2 |
+|        5 |             1 | Undeclared        |    100 |      5 |         1 |
++----------+---------------+-------------------+--------+--------+-----------+
+9 rows in set (0.00 sec)
+
+MariaDB [Examc0668050]> SELECT * FROM  employeeID;
+ERROR 1146 (42S02): Table 'examc0668050.employeeid' doesn't exist
+MariaDB [Examc0668050]> create view v1 as
+    -> select e.EmployeeID, e.Name, e.Position, e.Salary, s.ShipmentID, s.ShipmentDate, p.PackageNumber,
+    ->        p.Weight, p.Sender, c.Name , p.Recipient, c1.Name from employee e 
+    -> inner join shipment s on e.EmployeeID = s.Manager
+    -> inner join package p on s.ShipmentID = p.Shipment
+    -> inner join `client` c on p.Sender = c.AccountNumber
+    -> inner join `client` c1 on p.Recipient = c1.AccountNumber
+    -> where e.Name = 'Turanga leela';
+ERROR 1060 (42S21): Duplicate column name 'Name'
+MariaDB [Examc0668050]> 
+MariaDB [Examc0668050]> select * from v1;
+ERROR 1146 (42S02): Table 'examc0668050.v1' doesn't exist
+MariaDB [Examc0668050]> create view v1 as
+    -> select e.EmployeeID, e.Name, e.Position, e.Salary, s.ShipmentID, s.ShipmentDate, p.PackageNumber,
+    ->        p.Weight, p.Sender, c.Name , p.Recipient, c1.Name from employee e 
+    -> inner join shipment s on e.EmployeeID = s.Manager
+    -> inner join package p on s.ShipmentID = p.Shipment
+    -> inner join `client` c on p.Sender = c.AccountNumber
+    -> inner join `client` c1 on p.Recipient = c1.AccountNumber
+    -> where e.Name = 'Turanga leela';
+ERROR 1060 (42S21): Duplicate column name 'Name'
+MariaDB [Examc0668050]> create view v1 as
+    -> select e.EmployeeID, e.Name, e.Position, e.Salary, s.ShipmentID, s.ShipmentDate, p.PackageNumber,
+    ->        p.Weight, p.Sender, c.Name , p.Recipient, c1.Name from employee e 
+    -> inner join shipment s on e.EmployeeID = s.Manager
+    -> inner join package p on s.ShipmentID = p.Shipment
+    -> inner join `client` c on p.Sender = c.AccountNumber
+    -> inner join `client` c1 on p.Recipient = c1.AccountNumber
+    -> where e.Name = 'Turanga leela';
+ERROR 1060 (42S21): Duplicate column name 'Name'
+MariaDB [Examc0668050]> create view v1 as;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [Examc0668050]> create view v1 as
+    -> select e.EmployeeID, e.Name, e.Position, e.Salary, s.ShipmentID, s.ShipmentDate, p.PackageNumber,
+    ->        p.Weight, p.Sender, c.Name , p.Recipient, c1.Name from employee e 
+    -> inner join shipment s on e.EmployeeID = s.Manager
+    -> inner join package p on s.ShipmentID = p.Shipment
+    -> inner join `client` c on p.Sender = c.AccountNumber
+    -> inner join `client` c1 on p.Recipient = c1.AccountNumber
+    -> where e.Name = 'Turanga leela';
+ERROR 1060 (42S21): Duplicate column name 'Name'
+MariaDB [Examc0668050]> create view v1 as
+    -> select e.EmployeeID, e.Name, e.Position, e.Salary, s.ShipmentID, s.ShipmentDate, p.PackageNumber,p.Weight, p.Sender, c.Name , p.Recipient, c1.Name from employee e ;
+ERROR 1054 (42S22): Unknown column 's.ShipmentID' in 'field list'
+MariaDB [Examc0668050]> select e.EmployeeID, e.Name, e.Position, e.Salary, s.ShipmentID, s.ShipmentDate, p.PackageNumber,p.Weight, p.Sender, c.Name , p.Recipient, c1.Name from employee e ;
+ERROR 1054 (42S22): Unknown column 's.ShipmentID' in 'field list'
+MariaDB [Examc0668050]> select e.EmployeeID, e.Name, e.Position, e.Salary, s.ShipmentID, s.ShipmentDate, p.PackageNumber,
+    ->        p.Weight, p.Sender, c.Name , p.Recipient, c1.Name from employee e 
+    -> inner join shipment s on e.EmployeeID = s.Manager
+    -> inner join package p on s.ShipmentID = p.Shipment
+    -> inner join `client` c on p.Sender = c.AccountNumber
+    -> inner join `client` c1 on p.Recipient = c1.AccountNumber
+    -> where e.Name = 'Turanga leela';
++------------+---------------+----------+--------+------------+--------------+---------------+--------+--------+-----------------+-----------+-----------------+
+| EmployeeID | Name          | Position | Salary | ShipmentID | ShipmentDate | PackageNumber | Weight | Sender | Name            | Recipient | Name            |
++------------+---------------+----------+--------+------------+--------------+---------------+--------+--------+-----------------+-----------+-----------------+
+|          2 | Turanga Leela | Captain  |  10000 |          3 | NULL         |             1 |     15 |      3 | Barbados Slim   |         4 | Ogden Wernstrom |
+|          2 | Turanga Leela | Captain  |  10000 |          3 | NULL         |             2 |      3 |      5 | Leo Wong        |         1 | Zapp Brannigan  |
+|          2 | Turanga Leela | Captain  |  10000 |          3 | NULL         |             3 |      7 |      2 | Al Gore's Head  |         3 | Barbados Slim   |
+|          2 | Turanga Leela | Captain  |  10000 |          4 | NULL         |             1 |      5 |      4 | Ogden Wernstrom |         5 | Leo Wong        |
+|          2 | Turanga Leela | Captain  |  10000 |          4 | NULL         |             2 |     27 |      1 | Zapp Brannigan  |         2 | Al Gore's Head  |
++------------+---------------+----------+--------+------------+--------------+---------------+--------+--------+-----------------+-----------+-----------------+
+5 rows in set (0.03 sec)
+
+MariaDB [Examc0668050]> select p.Shipment, p.PackageNumber, p.`Contents`, p.Weight, c.Name as sender, c1.Name as recipient from package p 
+    -> inner join `client` c on p.Sender = c.AccountNumber
+    -> inner join `client` c1 on p.Recipient = c1.AccountNumber
+    -> where c.AccountNumber in (1, 5 , 6);
++----------+---------------+------------+--------+----------------+----------------+
+| Shipment | PackageNumber | Contents   | Weight | sender         | recipient      |
++----------+---------------+------------+--------+----------------+----------------+
+|        1 |             1 | Undeclared |    1.5 | Zapp Brannigan | Al Gore's Head |
+|        3 |             2 | Undeclared |      3 | Leo Wong       | Zapp Brannigan |
+|        4 |             2 | Undeclared |     27 | Zapp Brannigan | Al Gore's Head |
+|        5 |             1 | Undeclared |    100 | Leo Wong       | Zapp Brannigan |
++----------+---------------+------------+--------+----------------+----------------+
+4 rows in set (0.02 sec)
+
+MariaDB [Examc0668050]> select e.EmployeeID, e.Name, e.Position, e.Salary, p.Name, p.Coordinates, c.`Level` from employee e
+    -> inner join has_clearance c on e.EmployeeID = c.Employee
+    -> inner join planet p on c.Planet = p.PlanetID;
++------------+--------------------------+--------------+--------+------------------+------------------+-------+
+| EmployeeID | Name                     | Position     | Salary | Name             | Coordinates      | Level |
++------------+--------------------------+--------------+--------+------------------+------------------+-------+
+|          1 | Phillip J. Fry           | Delivery boy |   7500 | Omicron Persei 8 |    89475345.3545 |     2 |
+|          1 | Phillip J. Fry           | Delivery boy |   7500 | Decapod X        | 65498463216.3466 |     3 |
+|          2 | Turanga Leela            | Captain      |  10000 | Mars             |   32435021.65468 |     2 |
+|          2 | Turanga Leela            | Captain      |  10000 | Omega III        |    98432121.5464 |     4 |
+|          3 | Bender Bending Rodriguez | Robot        |   7500 | Tarantulon VI    | 849842198.354654 |     2 |
+|          3 | Bender Bending Rodriguez | Robot        |   7500 | Cannibalon       |  654321987.21654 |     4 |
+|          4 | Hubert J. Farnsworth     | CEO          |  20000 | DogDoo VII       |  65498721354.688 |     1 |
++------------+--------------------------+--------------+--------+------------------+------------------+-------+
+7 rows in set (0.00 sec)
+
+MariaDB [Examc0668050]> select s.ShipmentID, CONCAT(DATE_FORMAT(s.ShipmentDate,'%M, %d %Y')) ,
+    -> p.PackageNumber, c.Name as sender , c1.Name as 'receiver ' from shipment s
+    -> inner join package p on s.ShipmentID = p.Shipment
+    -> inner join `client` c on p.Sender = c.AccountNumber
+    -> inner join `client` c1 on p.Recipient = c1.AccountNumber
+    -> where p.Weight between 5 and 10;
++------------+-------------------------------------------------+---------------+-----------------+---------------+
+| ShipmentID | CONCAT(DATE_FORMAT(s.ShipmentDate,'%M, %d %Y')) | PackageNumber | sender          | receiver      |
++------------+-------------------------------------------------+---------------+-----------------+---------------+
+|          2 | May, 11 3004                                    |             1 | Al Gore's Head  | Barbados Slim |
+|          3 | NULL                                            |             3 | Al Gore's Head  | Barbados Slim |
+|          4 | NULL                                            |             1 | Ogden Wernstrom | Leo Wong      |
++------------+-------------------------------------------------+---------------+-----------------+---------------+
+3 rows in set (0.06 sec)
+
+MariaDB [Examc0668050]> select p.PlanetID, s.ShipmentID, s.ShipmentDate, p.Name, p.Coordinates from planet p
+    -> inner join shipment s on p.PlanetID = s.Planet
+    -> where p.Name in ('mars', 'amazonia')
+    -> ;
++----------+------------+--------------+------+----------------+
+| PlanetID | ShipmentID | ShipmentDate | Name | Coordinates    |
++----------+------------+--------------+------+----------------+
+|        3 |          3 | NULL         | Mars | 32435021.65468 |
++----------+------------+--------------+------+----------------+
+1 row in set (0.00 sec)
+
+MariaDB [Examc0668050]> select c.Name as 'sender', c1.Name as receiver, p.`Contents` from package p 
+    -> inner join `client` c on p.Sender = c.AccountNumber
+    -> inner join `client` c1 on p.Recipient = c1.AccountNumber
+    -> where p.`Contents` = 'Undeclared';
++-----------------+-----------------+------------+
+| sender          | receiver        | Contents   |
++-----------------+-----------------+------------+
+| Zapp Brannigan  | Al Gore's Head  | Undeclared |
+| Al Gore's Head  | Barbados Slim   | Undeclared |
+| Barbados Slim   | Ogden Wernstrom | Undeclared |
+| Leo Wong        | Zapp Brannigan  | Undeclared |
+| Al Gore's Head  | Barbados Slim   | Undeclared |
+| Ogden Wernstrom | Leo Wong        | Undeclared |
+| Zapp Brannigan  | Al Gore's Head  | Undeclared |
+| Leo Wong        | Zapp Brannigan  | Undeclared |
++-----------------+-----------------+------------+
+8 rows in set (0.00 sec)
+
+MariaDB [Examc0668050]> select e.EmployeeID , e.Name,  CONCAT('$', FORMAT(e.Salary, 2)) as salary, e.Position from employee e;
++------------+--------------------------+------------+--------------+
+| EmployeeID | Name                     | salary     | Position     |
++------------+--------------------------+------------+--------------+
+|          1 | Phillip J. Fry           | $7,500.00  | Delivery boy |
+|          2 | Turanga Leela            | $10,000.00 | Captain      |
+|          3 | Bender Bending Rodriguez | $7,500.00  | Robot        |
+|          4 | Hubert J. Farnsworth     | $20,000.00 | CEO          |
+|          5 | John A. Zoidberg         | $25.00     | Physician    |
+|          6 | Amy Wong                 | $5,000.00  | Intern       |
+|          7 | Hermes Conrad            | $10,000.00 | Bureaucrat   |
+|          8 | Scruffy Scruffington     | $5,000.00  | Janitor      |
++------------+--------------------------+------------+--------------+
+8 rows in set (0.00 sec)
+
+MariaDB [Examc0668050]> update employee e
+    -> set e.Remarks = 'remarks'
+    -> where e.Remarks is null;
+Query OK, 7 rows affected (0.07 sec)
+Rows matched: 7  Changed: 7  Warnings: 0
+
+MariaDB [Examc0668050]> create view v9 as
+    -> select CONCAT(e.Name, ' is Delivery boy and earns ' ,'$', FORMAT(e.Salary, 2), '/month') as employe_details  from employee e
+    -> ;
+ERROR 1271 (HY000): Illegal mix of collations for operation 'concat'
+MariaDB [Examc0668050]> update shipment s
+    -> set s.ShipmentDate = now()
+    -> where s.ShipmentDate is null;
+Query OK, 3 rows affected, 3 warnings (0.08 sec)
+Rows matched: 3  Changed: 3  Warnings: 3
+
+MariaDB [Examc0668050]> SELECT * FROM shipment;
++------------+--------------+---------+--------+
+| ShipmentID | ShipmentDate | Manager | Planet |
++------------+--------------+---------+--------+
+|          1 | 3004-05-11   |       1 |      1 |
+|          2 | 3004-05-11   |       1 |      2 |
+|          3 | 2017-09-18   |       2 |      3 |
+|          4 | 2017-09-18   |       2 |      4 |
+|          5 | 2017-09-18   |       7 |      5 |
++------------+--------------+---------+--------+
+5 rows in set (0.00 sec)
+
+MariaDB [Examc0668050]> update employee e
+    -> set e.Remarks = 'remarks'
+    -> where e.Remarks is null;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+MariaDB [Examc0668050]> SELECT * FROM employee;
++------------+--------------------------+--------------+--------+-------------------------------------------------------------------------+
+| EmployeeID | Name                     | Position     | Salary | Remarks                                                                 |
++------------+--------------------------+--------------+--------+-------------------------------------------------------------------------+
+|          1 | Phillip J. Fry           | Delivery boy |   7500 | Not to be confused with the Philip J. Fry from Hovering Squid World 97a |
+|          2 | Turanga Leela            | Captain      |  10000 | remarks                                                                 |
+|          3 | Bender Bending Rodriguez | Robot        |   7500 | remarks                                                                 |
+|          4 | Hubert J. Farnsworth     | CEO          |  20000 | remarks                                                                 |
+|          5 | John A. Zoidberg         | Physician    |     25 | remarks                                                                 |
+|          6 | Amy Wong                 | Intern       |   5000 | remarks                                                                 |
+|          7 | Hermes Conrad            | Bureaucrat   |  10000 | remarks                                                                 |
+|          8 | Scruffy Scruffington     | Janitor      |   5000 | remarks                                                                 |
++------------+--------------------------+--------------+--------+-------------------------------------------------------------------------+
+8 rows in set (0.00 sec)
+
+MariaDB [Examc0668050]> create view v9 as
+    -> select CONCAT(e.Name, ' is Delivery boy and earns ' ,'$', FORMAT(e.Salary, 2), '/month') as employe_details  from employee e
+    -> ;
+ERROR 1271 (HY000): Illegal mix of collations for operation 'concat'
+MariaDB [Examc0668050]> select CONCAT(e.Name, ' is Delivery boy and earns ' ,'$', FORMAT(e.Salary, 2), '/month') as employe_details  from employee e;
+ERROR 1271 (HY000): Illegal mix of collations for operation 'concat'
+MariaDB [Examc0668050]> select CONCAT(e.Name, ' is Delivery boy and earns ' ,'$', FORMAT(e.Salary, 2), '/month') as employe_details  from employee e;
+ERROR 1271 (HY000): Illegal mix of collations for operation 'concat'
+MariaDB [Examc0668050]> SELECT * FROM employee;
++------------+--------------------------+--------------+--------+-------------------------------------------------------------------------+
+| EmployeeID | Name                     | Position     | Salary | Remarks                                                                 |
++------------+--------------------------+--------------+--------+-------------------------------------------------------------------------+
+|          1 | Phillip J. Fry           | Delivery boy |   7500 | Not to be confused with the Philip J. Fry from Hovering Squid World 97a |
+|          2 | Turanga Leela            | Captain      |  10000 | remarks                                                                 |
+|          3 | Bender Bending Rodriguez | Robot        |   7500 | remarks                                                                 |
+|          4 | Hubert J. Farnsworth     | CEO          |  20000 | remarks                                                                 |
+|          5 | John A. Zoidberg         | Physician    |     25 | remarks                                                                 |
+|          6 | Amy Wong                 | Intern       |   5000 | remarks                                                                 |
+|          7 | Hermes Conrad            | Bureaucrat   |  10000 | remarks                                                                 |
+|          8 | Scruffy Scruffington     | Janitor      |   5000 | remarks                                                                 |
++------------+--------------------------+--------------+--------+-------------------------------------------------------------------------+
+8 rows in set (0.00 sec)
+
